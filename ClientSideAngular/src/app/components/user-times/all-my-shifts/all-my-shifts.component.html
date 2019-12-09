@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <button
+        class="btn btn-warning btn btn-primary btn-lg btn btn-primary btn-lg btn-block"
+        type="submit"
+        (click)="onSubmitMyShift()"
+      >
+        All my Shifts
+      </button>
+    </div>
+    <div class="col-sm">
+      <p>Select month:</p>
+      <select [(ngModel)]="selectedMonth">
+        <option *ngFor="let c of months" [ngValue]="c">{{ c.Text }}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="clickOnMyShifts" class="container">
+  <p>Your Total Houers For This Month: {{ totalHoursForMonth }}</p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Start Shift</th>
+        <th scope="col">End Shift</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let time of UserService.Timelist">
+          <td (click)="populateForm(time)">{{time.date}}</td>
+          <td (click)="populateForm(time)">{{time.enteryTime}}</td>
+          <td (click)="populateForm(time)">{{time.exitTime}}</td>
+          <td (click)="populateForm(time)">{{time.exitTime}}</td>
+          <td (click)="populateForm(time)">{{calcTotalHours(time.enteryTime, time.exitTime)}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
